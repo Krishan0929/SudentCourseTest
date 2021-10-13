@@ -1,10 +1,7 @@
 package com.StudentManagement.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class student
 {
     @Id
@@ -28,11 +26,14 @@ public class student
 
     private String gender;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     @JoinTable(name = "student_course",
                joinColumns = {@JoinColumn(name = "student_id",referencedColumnName = "student_id")},
              inverseJoinColumns = {@JoinColumn(name = "course_id",referencedColumnName = "course_id")})
     private List<course> courses;
+
+    /*@OneToMany(cascade = CascadeType.ALL)
+    private List<studentcourse> studentcourses;*/
 
 }

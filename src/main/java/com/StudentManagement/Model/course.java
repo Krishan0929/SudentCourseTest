@@ -1,13 +1,9 @@
 package com.StudentManagement.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -15,6 +11,7 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class course
 {
     @Id
@@ -22,4 +19,7 @@ public class course
     private int id;
 
     private String name;
+
+    @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
+    private List<student> students;
 }
